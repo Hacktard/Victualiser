@@ -1,4 +1,4 @@
-	#include <iostream.h>
+#include <iostream.h>
 #include <fstream.h>
 #include <stdio.h>
 #include <process.h>
