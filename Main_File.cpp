@@ -9,19 +9,19 @@ void order(){
    init:
    cout << "Select Food Brand \n";
    cout << "1. Burger King \n";
-	cout << "2. Taco Bell \n";
+   cout << "2. Taco Bell \n";
    cout << "3. Dominos \n";
    cout << "4. Pizza Hut \n";
    cout <<  "5. KFC \n";
-	cout << "6. I Want Go Local \n";
+   cout << "6. I Want Go Local \n";
    int ch;
    cin >> ch;
    clrscr();
-	switch(ch){
+   switch(ch){
       case 1:
          ShellExecute(NULL, "open", "http://bkdelivery.in/order-online/?utm_source=google&utm_medium=cpc&utm_campaign=aug&utm_term=bk20&utm_content=brand&gclid=Cj0KCQjw4eXPBRCtARIsADvOjY0h2hnajP7PrHqOZdcwsEIlpWf4swRLrMFaJqG_a-sfyKgwLrhhc7AaAgLhEALw_wcB",NULL, NULL, SW_SHOWNORMAL);
          break;
-		case 2:
+case 2:
          ShellExecute(NULL, "open", "https://www.tacobell.com/delivery",NULL, NULL, SW_SHOWNORMAL);
          break;
       case 3:
