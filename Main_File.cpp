@@ -3,7 +3,13 @@
 #include <stdio.h>
 #include <process.h>
 #include <conio.h>
+#include <string.h>
 #include <shellapi.h>
+
+struct rev{
+	char name[25];
+	char review[200];
+};
 
 void order(){
    init:
@@ -35,50 +41,67 @@ case 2:
          break;
       case 6:
 			clrscr();
-         shard:
-         cout << "Which Service You Want To Use ? \n";
+         	shard:
+         	cout << "Which Service You Want To Use ? \n";
 			cout << "1. Swiggy \n";
-         cout << "2. Faasos  \n";
-         cout << "3. Zomato \n";
+         	cout << "2. Faasos  \n";
+         	cout << "3. Zomato \n";
 			cout << "4. Food Panda \n";
-         int k;
-         cin >> k;
+         	int k;
+         	cin >> k;
 			switch(k){
-            case 1:
-               ShellExecute(NULL, "open", "https://www.swiggy.com/delhi?utm_source=Google-Sok&utm_source=Google-Sok&utm_medium=CPC&utm_medium=CPC&utm_campaign=google_web_desktop_order_na_search_delhi_ncr_search_brand_newuser&utm_campaign=Google_Web_Desktop_Order_NA_Search_Brand_NewUser_DelhiNCR&gclid=Cj0KCQjw4eXPBRCtARIsADvOjY05xhv3M0d_Lx-RKnw9S3CBc2-c9r9uvvdUXyv-DABTtrqAM1DJ-DEaAhDmEALw_wcB",NULL, NULL, SW_SHOWNORMAL);
+            	case 1:
+               		ShellExecute(NULL, "open", "https://www.swiggy.com/delhi?utm_source=Google-Sok&utm_source=Google-Sok&utm_medium=CPC&utm_medium=CPC&utm_campaign=google_web_desktop_order_na_search_delhi_ncr_search_brand_newuser&utm_campaign=Google_Web_Desktop_Order_NA_Search_Brand_NewUser_DelhiNCR&gclid=Cj0KCQjw4eXPBRCtARIsADvOjY05xhv3M0d_Lx-RKnw9S3CBc2-c9r9uvvdUXyv-DABTtrqAM1DJ-DEaAhDmEALw_wcB",NULL, NULL, SW_SHOWNORMAL);
 					break;
-            case 2:
-               ShellExecute(NULL, "open", "https://order.faasos.io",NULL, NULL, SW_SHOWNORMAL);
+            	case 2:
+               		ShellExecute(NULL, "open", "https://order.faasos.io",NULL, NULL, SW_SHOWNORMAL);
 					break;
-            case 3:
+            	case 3:
 					ShellExecute(NULL, "open", "https://www.zomato.com/ncr/order-food-online?open=now&utm_source=Google&utm_campaign=SEM-Web-O2-Head-NCR_Exact&utm_medium=CPC&utm_term=Zomato&gclid=Cj0KCQjw4eXPBRCtARIsADvOjY2fJr_U6tQB-_GFzTjL_xLQQW1dyHKalSeexX2Hqc8FGCe0BDhbauAaAkKjEALw_wcB",NULL, NULL, SW_SHOWNORMAL);
-               break;
+               		break;
 				case 4:
-               ShellExecute(NULL, "open", "https://www.foodpanda.in",NULL, NULL, SW_SHOWNORMAL);
+               		ShellExecute(NULL, "open", "https://www.foodpanda.in",NULL, NULL, SW_SHOWNORMAL);
 					break;
-            default:
+            	default:
 					clrscr();
-               cout << "Invalid Keyword, Please Enter Again \n";
+               		cout << "Invalid Keyword, Please Enter Again \n";
 					goto shard;
             }
 				break;
-         default:
-				clrscr();
-            cout << "Invalid Keyword \n";
-				goto init;
-		}
+      default:
+			clrscr();
+           	cout << "Invalid Keyword \n";
+			goto init;
+	}
 }
 
 void status(){
-
+	//to be made;
 }
 
 void view_rev(){
-
+	fstream file("REVIEW.dat", ios::binary|ios::in);
+	rev a;
+	file.read((char*)&a, sizeof(a));
+	while(file){
+		cout<<a.name<<endl;
+		cout<<a.review<<endl;
+		file.read((char*)&a, sizeof(a));
+		cout<<endl;
+	}
+	file.close();
 }
 
 void write_rev(){
-
+	fstream file("REVIEW.dat",ios::binary|ios::app);
+	rev x; 
+	cout<<"Enter your name please!! \n";
+	gets(x.name);
+	cout<<"Enter your review \n";
+	gets(x.review);
+	file.write((char*)&x, sizeof(x));
+	cout<<endl;
+	file.close();
 }
 
 void main(){
