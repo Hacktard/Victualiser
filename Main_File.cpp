@@ -81,14 +81,21 @@ void status(){
 
 void view_rev(){
 	fstream file("REVIEW.dat", ios::binary|ios::in);
-	rev a;
+	rev a,x; int check=0;
+	cout<<"Enter the name of the person who's review you want to view!! \n";
+	gets(x.name);
 	file.read((char*)&a, sizeof(a));
-	while(file){
+	while(file){ 
+		if(strcmpi(a.name,x.name)=0){ 
 		cout<<a.name<<endl;
 		cout<<a.review<<endl;
-		file.read((char*)&a, sizeof(a));
-		cout<<endl;
+		}
+		else check++;
 	}
+		if(!check)
+			cout<<"sorry the name you have entered doesn't match \n";
+		
+	
 	file.close();
 }
 
