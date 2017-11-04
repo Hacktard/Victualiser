@@ -79,6 +79,36 @@ void status(){
 	//to be made;
 }
 
+void editrev(){
+	fstream file1, file2; int count=0;
+	file1.open("REVIEW.dat", ios::binary|ios::out);
+	file2.open("TEMP.dat", ios::binary|ios::in);
+	rev a, anew;
+	cout<<"Enter your name \n";
+	gets(anew.name);
+	file1.read((char*)&a, sizeof(a));
+	while(file1){
+		if(strcmpi(anew.name,a.name)!=0)
+			file2.write((char*)&a, sizeof(a));
+		else
+			count++;
+		}
+	if(!count){
+		puts(anew.name);
+		cout<<" did not match \n";
+		}
+	else{
+		cout<<"Enter your new review \n";
+		gets(anew.review);
+		file2.write((char*)&anew, sizeof(anew));
+		}
+	remove("REVIEW.dat");
+	rename("REVIEW.dat","TEMP.dat");
+	file1.close();
+	file2.close();
+	
+}
+
 void view_rev(){
 	fstream file("REVIEW.dat", ios::binary|ios::in);
 	rev a,x; int check=0;
