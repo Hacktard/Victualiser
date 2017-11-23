@@ -165,7 +165,7 @@ void editrev(){
 	remove("REVIEW.dat");
 	rename("REVIEW.dat","TEMP.dat");
 	file1.close();
-	file2.close();	
+	file2.close();
 }
 
 void view_rev(){
@@ -174,22 +174,23 @@ void view_rev(){
 	cout<<"Enter the name of the person who's review you want to view!! \n";
 	gets(x.name);
 	file.read((char*)&a, sizeof(a));
-	while(file){ 
-		if(strcmpi(a.name,x.name)==0){ 
-			cout<<a.name<<endl;
+	while(file){
+		if(strcmpi(a.name,x.name)==0){
+			cout<<endl<<a.name<<endl;
 			cout<<a.review<<endl;
+			check++;
 		}
-		else check++;
 		file.read((char*)&a, sizeof(a));
 	}
 	if(!check)
-		cout<<"sorry the name you have entered doesn't match \n";
+		cout<<endl<<"sorry the name you have entered doesn't match \n";
+      cout<<endl;
 	file.close();
 }
 
 void write_rev(){
 	fstream file("REVIEW.dat",ios::binary|ios::app);
-	rev x; 
+	rev x;
 	cout<<"Enter your name please!! \n";
 	gets(x.name);
 	cout<<"Enter your review \n";
@@ -205,24 +206,24 @@ void main(){
 	start:
 	cout << "How can we help you? \n";
 	cout << "1. Order Food\n";
-   	cout << "2. Delivery Status \n";
-   	cout << "3. View Customer Reviews \n";
+		cout << "2. Delivery Status \n";
+		cout << "3. View Customer Reviews \n";
 	cout << "4. Write Review \n";
 	cout << "5. Exit \n";
-   	cin >> ch;
+		cin >> ch;
 	switch(ch){
-      	case 1: order(); 
-		  		break;
-     	case 2: status(); 
-		 		break;
-		case 3: view_rev(); 
+			case 1: order();
 				break;
-      	case 4: write_rev(); 
-		  		break;
-		case 5: exit(0); 
+		case 2: status();
 				break;
-      	default: cout << "Invalid Keyword, Please enter again \n"; 
-		  		clrscr(); 
+		case 3: view_rev();
+				break;
+			case 4: write_rev();
+				break;
+		case 5: exit(0);
+				break;
+			default: cout << "Invalid Keyword, Please enter again \n";
+				clrscr();
 				goto start;
 	}
 	goto start;
