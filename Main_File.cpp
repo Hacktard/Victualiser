@@ -175,7 +175,7 @@ void view_rev(){
 	gets(x.name);
 	file.read((char*)&a, sizeof(a));
 	while(file){ 
-		if(strcmpi(a.name,x.name)=0){ 
+		if(strcmpi(a.name,x.name)==0){ 
 			cout<<a.name<<endl;
 			cout<<a.review<<endl;
 		}
