@@ -8,13 +8,6 @@
 #include <string.h>
 #include <shellapi.h>
 
-//structures defined
-
-/*struct user{
-	char n[200];
-	char name[30];
-};*/
-
 //class defined
 
 class rev
@@ -24,40 +17,44 @@ class rev
 	public:
 		char name_c(char x[])
 		{
-		if(strcmpi(name,x)==0)
+			if(strcmpi(name,x)==0)
 			return 1;
 			else return 0;            //member functions
 		}
 		void review_c()
 		{
-		gets(n);
+			gets(n);
 		}
-
 		void input()
-		{cout<<"Enter the name:\n";
-		 gets(name);
-		 cout<<"Enter the review\n";
-		 gets(n);
+		{
+			cout<<endl<<"Enter the name:\n";
+		 	gets(name);
+		 	cout<<"Enter the review\n";
+		 	gets(n);
 		}
 		void display()
-		{cout<<"Name :  ";
-		puts(name);
-		cout<<"Review:  ";
-		puts(n);
-		cout<<endl;
+		{
+			cout<<endl;
+			cout<<"Name :  ";
+			puts(name);
+			cout<<"Review :  ";
+			puts(n);
+			cout<<endl;
 		}
-
 		void disn()
-		{cout<<"All the reviews are:-\n";
-		 puts(name);
-		 cout<<endl;
-		 puts(n);
-		 cout<<endl;
+		{
+			cout<<"\nAll the reviews are:-\n";
+		 	puts(name);
+		 	cout<<endl;
+		 	puts(n);
+		 	cout<<endl;
 		}
 		void change()
-	{ char newinfo[200];
-		gets(newinfo);
-	 strcpy(n,newinfo);}
+		{ 
+			char newinfo[200];
+			gets(newinfo);
+	 		strcpy(n,newinfo);
+	 	}
 };
 
 //functions
@@ -196,36 +193,6 @@ void status()
 	}
 }
 
-void edit_rev()
-{
-	fstream file1;
-	file1.open("REVIEW.dat", ios::out|ios::binary|ios::in);
-	rev a;
-	char anewname[30];
-	cout<<"Enter Search Query(i.e.the name of the user) \n" ;
-	gets(anewname);
-	int count = 0;
-	long ptr= sizeof(a);
-	while(file1.read((char*)&a, sizeof(a)))
-	{
-		if(a.name_c(anewname))
-		{
-			cout<<"Result found, Enter the new review\n";
-			a.change();
-			file1.seekp(-1*ptr,ios::cur);
-			file1.write((char*)&a, sizeof(a));
-			count++;
-		}
-
-	}
-	if(!count)
-	{
-		cout<<"Result not found \n";
-	}
-
-	file1.close();
-}
-
 void view_all()
 {
 	fstream file("REVIEW.dat", ios::binary|ios::in);
@@ -241,38 +208,39 @@ void view_all()
 void view_rev()
 {
 	start:
-	cout<<"You want to \n 1. View all the Reviews \n 2.Some Specific Review\n";
+	cout<<"You want to: \n1. View all the Reviews \n2.Some Specific Review\n";
 	int a;
 	cin>>a;
 	if(a==1)
 	{
 		view_all();
 	}
-	else if(a==2)
-	{  char nm[30];
-		fstream file("REVIEW.dat", ios::binary|ios::in);
-		rev z;
-		int check=0;
-		cout<<"Enter the name of the person who's review you want to view!!\n";
-		gets(nm);
-
-		while(file.read((char*)&z, sizeof(z)))
-		{
-			if(z.name_c(nm))
-			{	z.display();
-				check++;
+	else 
+		if(a==2)
+		{  
+			char nm[30];
+			fstream file("REVIEW.dat", ios::binary|ios::in);
+			rev z;
+			int check=0;
+			cout<<"Enter the name of the person who's review you want to view!!\n";
+			gets(nm);
+			while(file.read((char*)&z, sizeof(z)))
+			{			
+				if(z.name_c(nm))
+				{	
+					z.display();
+					check++;
+				}
 			}
+			if(!check)
+			{
+				cout<<endl<<"The name you have entered doesn't match! Invalid input! \n";
+				goto start;
+			}
+			file.close();
 		}
-		if(!check)
-		{
-			cout<<endl<<"The name you have entered doesn't match! Invalid input! \n";
-			goto start;
-		}
-
-		file.close();
-
 }
-}
+
 void write_rev()
 {
 	fstream file1("REVIEW.dat",ios::binary|ios::out|ios::app);
@@ -295,8 +263,7 @@ void main()
 	cout<<"2. Delivery Status \n";
 	cout<<"3. View Customer Reviews \n";
 	cout<<"4. Write Review \n";
-	cout<<"5. Edit Review \n";
-	cout<<"6. Exit \n";
+	cout<<"5. Exit \n";
 	cin>>ch;
 	switch(ch)
 	{
@@ -313,9 +280,6 @@ void main()
 			write_rev();
 			break;
 		case 5:
-			edit_rev();
-			break;
-		case 6:
 			exit(0);
 			break;
 		default:
